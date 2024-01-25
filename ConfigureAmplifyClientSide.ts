@@ -4,6 +4,13 @@ import { Amplify } from "aws-amplify";
 import { ResourcesConfig } from "@aws-amplify/core";
 
 const config: ResourcesConfig = {
+  API: {
+    GraphQL: {
+      endpoint: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT as string,
+      region: process.env.NEXT_PUBLIC_REGION as string,
+      defaultAuthMode: "userPool",
+    },
+  },
   Auth: {
     Cognito: {
       userPoolId: process.env.NEXT_PUBLIC_USER_POOL_ID as string,
