@@ -5,18 +5,19 @@ import { create } from "zustand";
 
 interface UserState {
   username: string | null;
-  setUsername: (username: string | null) => void;
+  sub: string | null;
+  setUsername: (username: string | null, sub: string | null) => void;
   fetchUsername: () => Promise<void>;
 }
 
 export const useUserStore = create<UserState>((set) => ({
   username: null,
-  setUsername: (username) => set({ username }),
+  sub: null,
+  setUsername: (username, sub) => set({ username, sub }),
   fetchUsername: async () => {
     try {
-      const name = await getUserName();
-      console.log(name);
-      set({ username: name });
+      const { name, userID } = await getUserName();
+      set({ username: name, sub: userID });
     } catch (error) {
       console.error(error);
     }
@@ -27,7 +28,8 @@ async function getUserName() {
   try {
     const { username } = await getCurrentUser();
     const userData = await getUserByID(username);
-    return userData.Name;
+
+    return { name: userData.Name, userID: userData.UserID };
   } catch (err) {
     console.log(err);
     // Handle the error, you might want to return a default value or throw the error again

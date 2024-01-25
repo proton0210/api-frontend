@@ -1,12 +1,15 @@
 "use client";
 
+import { handleSignOut } from "@/actions/auth.actions";
+import { useUserStore } from "@/store/userStore";
 import { Disclosure } from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import TodoForm from "../TodoForm";
-import { handleSignOut } from "@/actions/auth.actions";
 export default function NavBar() {
+  const { username, sub } = useUserStore();
+
   const [showTodoForm, setShowTodoForm] = useState(false);
 
   const signOut = async () => {
@@ -51,7 +54,7 @@ export default function NavBar() {
                       Create Todo
                     </button>
                     <p className="inline ml-4 text-sm font-medium text-gray-900">
-                      {"NAME"}
+                      {username}
                     </p>
                   </div>
                   <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">

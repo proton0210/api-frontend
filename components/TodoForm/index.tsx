@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { createTodoAppsync } from "@/actions/appsync.actions";
+import { useUserStore } from "@/store/userStore";
+import { useState } from "react";
 
 type CreateTodoInput = {
-  userId: string;
+  UserID: string;
   title: string;
 };
 
@@ -14,11 +15,12 @@ interface TodoFormProps {
 
 export default function TodoForm({ setShowTodoForm }: TodoFormProps) {
   const [title, setTitle] = useState("");
+  const { sub } = useUserStore();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const todoData: CreateTodoInput = {
-      userId: "123",
+      UserID: sub as string,
       title,
     };
 
