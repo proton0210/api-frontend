@@ -39,3 +39,37 @@ export const createTodoAppsync = async (todoData: CreateTodoInput) => {
     throw error; // Rethrow the error or handle it according to your requirements
   }
 };
+
+type ListTodosResponse = {
+  UserID: string;
+  TodoID: string;
+  title: string;
+  completed: boolean;
+}[];
+
+export const listTodosAppsync = async (UserID: string) => {
+  console.log("UserID", UserID);
+  try {
+    const response = await client.graphql({
+      query: `
+          query ListTodos($UserID: ID!) {
+            listTodos(UserID: $UserID) {
+              UserID
+              TodoID
+              title
+              completed
+            }
+          }
+        `,
+      variables: {
+        UserID,
+      },
+      authMode: "userPool",
+    });
+
+    return (response as any).data.listTodos as ListTodosResponse;
+  } catch (error) {
+    // Handle error if necessary
+    throw error; // Rethrow the error or handle it according to your requirements
+  }
+};
