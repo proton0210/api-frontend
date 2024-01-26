@@ -32,6 +32,7 @@ export default function TodoForm({ setShowTodoForm }: TodoFormProps) {
       // Handle error
     } finally {
       setShowTodoForm(false);
+      window.location.reload();
     }
   };
 

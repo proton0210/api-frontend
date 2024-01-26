@@ -7,6 +7,16 @@ type CreateTodoInput = {
   title: string;
 };
 
+type DeleteTodoInput = {
+  UserID: string;
+  title: string;
+};
+
+type UpdateTodoInput = {
+  UserID: string;
+  title: string;
+};
+
 type CreateTodoResponse = {
   UserID: string;
   TodoID: string;
@@ -70,6 +80,53 @@ export const listTodosAppsync = async (UserID: string) => {
     return (response as any).data.listTodos as ListTodosResponse;
   } catch (error) {
     // Handle error if necessary
+    throw error; // Rethrow the error or handle it according to your requirements
+  }
+};
+export const deleteTodoAppsync = async (todoData: DeleteTodoInput) => {
+  try {
+    const response = await client.graphql({
+      query: `
+          mutation DeleteTodo($input: DeleteTodoInput!) {
+            deleteTodo(input: $input) 
+          }
+        `,
+      variables: {
+        input: todoData,
+      },
+      authMode: "userPool",
+    });
+
+    return (response as any).data.deleteTodo as CreateTodoResponse;
+  } catch (error) {
+    // Handle error if necessary
+    console.log("error", error);
+    throw error; // Rethrow the error or handle it according to your requirements
+  }
+};
+
+export const updateTodoAppsync = async (todoData: UpdateTodoInput) => {
+  try {
+    const response = await client.graphql({
+      query: `
+          mutation UpdateTodo(
+            $input: UpdateTodoInput!
+          ) {
+            updateTodo(
+              input: $input
+            )
+          }
+        `,
+      variables: {
+        input: todoData,
+      },
+      authMode: "userPool",
+    });
+
+    return (response as any).data.updateTodo as CreateTodoResponse;
+  } catch (error) {
+    // Handle error if necessary
+    console.log("error", error);
     throw error; // Rethrow the error or handle it according to your requirements
   }
 };

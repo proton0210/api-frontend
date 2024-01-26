@@ -2,6 +2,8 @@
 
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { deleteTodoAppsync, updateTodoAppsync } from "@/actions/appsync.actions";
+import { useUserStore } from "@/store/userStore";
 
 interface EditProps {
   title: string;
@@ -11,18 +13,28 @@ interface EditProps {
 export default function Edit({ title, todoId }: EditProps) {
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
+  const sub = useUserStore((state) => state.sub) as any;
   const handleCancel = () => {
+    window.location.reload();
     setOpen(false);
   };
 
   // log userId and todoId
-  const handleDelete = () => {
-    // TODO: delete todo
+  const handleDelete = async () => {
+    const todoData = {
+      UserID: sub as string,
+      title,
+    };
+    const response = await deleteTodoAppsync(todoData);
     handleCancel();
   };
 
   const handleComplete = async () => {
-    // TODO: complete todo
+    const todoData = {
+      UserID: sub as string,
+      title,
+    };
+    const response = await updateTodoAppsync(todoData);
     handleCancel();
   };
 
