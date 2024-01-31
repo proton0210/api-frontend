@@ -55,12 +55,15 @@ import Table from "./Table";
 import { listTodosAppsync } from "@/actions/appsync.actions";
 import { useUserStore } from "@/store/userStore";
 import useSWR from "swr";
+import { getTodos } from "@/actions/apigateway.actions";
 
 const Todos = () => {
   const { sub } = useUserStore();
-  const { data: todos, error } = useSWR(sub ? ["todos", sub] : null, () =>
-    listTodosAppsync(sub as string)
-  );
+  const { data: todos, error } = useSWR(
+    sub ? ["todos", sub] : null,
+    () => getTodos(sub as string)
+    // () => listTodosAppsync(sub as string)
+  ) as any;
 
   if (!sub) {
     return <div>Loading</div>;

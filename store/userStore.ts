@@ -1,6 +1,7 @@
 "use client";
 import { getUserByID } from "@/actions/usersTable.actions";
 import { getCurrentUser } from "aws-amplify/auth";
+
 import { create } from "zustand";
 
 interface UserState {

@@ -10,6 +10,12 @@ const config: ResourcesConfig = {
       region: process.env.NEXT_PUBLIC_REGION as string,
       defaultAuthMode: "userPool",
     },
+    REST: {
+      TodoHttpAPI: {
+        endpoint: process.env.NEXT_PUBLIC_APIGATEWAY_ENDPOINT as string,
+        region: process.env.NEXT_PUBLIC_REGION as string,
+      },
+    },
   },
   Auth: {
     Cognito: {
@@ -20,8 +26,9 @@ const config: ResourcesConfig = {
   },
 };
 
-Amplify.configure(config, { ssr: true });
-
+Amplify.configure(config, {
+  ssr: true,
+});
 export default function ConfigureAmplifyClientSide() {
   return null;
 }

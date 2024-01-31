@@ -8,6 +8,12 @@ const config: ResourcesConfig = {
       region: process.env.NEXT_PUBLIC_REGION as string,
       defaultAuthMode: "userPool",
     },
+    REST: {
+      TodoAPI: {
+        endpoint: process.env.NEXT_PUBLIC_APIGATEWAY_ENDPOINT as string,
+        region: process.env.NEXT_PUBLIC_REGION as string,
+      },
+    },
   },
   Auth: {
     Cognito: {

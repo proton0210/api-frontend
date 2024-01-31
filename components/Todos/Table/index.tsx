@@ -8,7 +8,7 @@ type TableProps = {
 };
 
 type Todo = {
-  todoId: string;
+  TodoID: string;
   title: string;
   completed: boolean;
   createdAt: string;
@@ -66,7 +66,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
               {/* Table body */}
               <tbody className="divide-y divide-gray-200">
                 {data.map((todo) => (
-                  <tr key={todo.todoId}>
+                  <tr key={todo.TodoID}>
                     <td className="px-3 py-3.5 text-left text-sm text-gray-500">
                       {todo.title}
                     </td>
@@ -86,9 +86,9 @@ const Table: React.FC<TableProps> = ({ data }) => {
                     </td>
                     <td className="relative py-3.5 pl-3 pr-4 sm:pr-0">
                       {/* Edit button */}
-                      {editTodoId === todo.todoId ? (
+                      {editTodoId === todo.TodoID ? (
                         <React.Fragment>
-                          <Edit title={todo.title} todoId={todo.todoId} />
+                          <Edit title={todo.title} todoId={todo.TodoID} />
                           <button
                             onClick={handleCancelEdit}
                             className="text-indigo-600 hover:text-indigo-900"
@@ -98,7 +98,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
                         </React.Fragment>
                       ) : (
                         <button
-                          onClick={() => handleEdit(todo.todoId)}
+                          onClick={() => handleEdit(todo.TodoID)}
                           className="text-indigo-600 hover:text-indigo-900"
                         >
                           Edit

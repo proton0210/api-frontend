@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
-import ConfigureAmplifyClientSide from "@/ConfigureAmplifyClientSide";
+
 import { useUserStore } from "@/store/userStore";
 import { useEffect } from "react";
+import ConfigureAmplifyClientSide from "@/ConfigureAmplifyClientSide";
 
 const inter = Inter({ subsets: ["latin"] });
 
