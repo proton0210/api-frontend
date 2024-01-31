@@ -2,8 +2,12 @@
 
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { deleteTodoAppsync, updateTodoAppsync } from "@/actions/appsync.actions";
+import {
+  deleteTodoAppsync,
+  updateTodoAppsync,
+} from "@/actions/appsync.actions";
 import { useUserStore } from "@/store/userStore";
+import { deleteTodo, putTodo } from "@/actions/apigateway.actions";
 
 interface EditProps {
   title: string;
@@ -25,7 +29,8 @@ export default function Edit({ title, todoId }: EditProps) {
       UserID: sub as string,
       title,
     };
-    const response = await deleteTodoAppsync(todoData);
+    // const response = await deleteTodoAppsync(todoData);
+    const response = await deleteTodo(sub as string, title as string);
     handleCancel();
   };
 
@@ -34,7 +39,8 @@ export default function Edit({ title, todoId }: EditProps) {
       UserID: sub as string,
       title,
     };
-    const response = await updateTodoAppsync(todoData);
+    // const response = await updateTodoAppsync(todoData);
+    const response = await putTodo(sub as string, title);
     handleCancel();
   };
 
