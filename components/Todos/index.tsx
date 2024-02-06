@@ -61,8 +61,8 @@ const Todos = () => {
   const { sub } = useUserStore();
   const { data: todos, error } = useSWR(
     sub ? ["todos", sub] : null,
-    () => getTodos(sub as string)
-    // () => listTodosAppsync(sub as string)
+    // () => getTodos(sub as string)
+    () => listTodosAppsync(sub as string)
   ) as any;
 
   if (!sub) {

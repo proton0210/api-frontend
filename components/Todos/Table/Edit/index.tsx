@@ -29,8 +29,8 @@ export default function Edit({ title, todoId }: EditProps) {
       UserID: sub as string,
       title,
     };
-    // const response = await deleteTodoAppsync(todoData);
-    const response = await deleteTodo(sub as string, title as string);
+    const response = await deleteTodoAppsync(todoData);
+    // const response = await deleteTodo(sub as string, title as string);
     handleCancel();
   };
 
@@ -39,8 +39,8 @@ export default function Edit({ title, todoId }: EditProps) {
       UserID: sub as string,
       title,
     };
-    // const response = await updateTodoAppsync(todoData);
-    const response = await putTodo(sub as string, title);
+    const response = await updateTodoAppsync(todoData);
+    // const response = await putTodo(sub as string, title);
     handleCancel();
   };
 
