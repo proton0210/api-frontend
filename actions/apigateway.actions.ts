@@ -35,7 +35,7 @@ export async function postTodo(sub: string, title: string) {
     };
     const restOperation = post({
       apiName: API_NAME,
-      path: "/todo",
+      path: "todo",
       options: {
         headers: {
           Authorization: authToken as string,
@@ -61,7 +61,7 @@ export async function putTodo(sub: string, title: string) {
     };
     const restOperation = put({
       apiName: API_NAME,
-      path: "/todo",
+      path: "todo",
       options: {
         headers: {
           Authorization: authToken as string,
